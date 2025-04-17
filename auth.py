@@ -8,7 +8,7 @@ from email_utils import send_otp
 def login_page():
     st.title("Login / Sign Up")
     menu = ["Login", "Sign Up", "Forgot Password", "Change Password"]
-    if st.session_state.get("authenticated") and st.session_state.get("username") == "admin":
+    if st.session_state.get("authenticated") and st.session_state.get("username") == "parasadmin":
         menu.extend(["View Users", "Login History"])
     choice = st.sidebar.selectbox("Menu", menu)
 
