@@ -4,6 +4,11 @@ from user_data import (
     update_password, log_login, get_all_users, get_login_history
 )
 from email_utils import send_otp
+import toml  # For reading secrets.toml
+
+# Load credentials from .streamlit/secrets.toml
+secrets = toml.load(".streamlit/secrets.toml")
+ADMIN_USERNAME=secrets["ADMIN_USERNAME"]
 
 def login_page():
     # Title for the login page
@@ -13,8 +18,8 @@ def login_page():
     menu = ["Login", "Sign Up", "Forgot Password", "Change Password"]
     
     # If the user is authenticated as "parasadmin", add admin-only options to the menu
-    if st.session_state.get("authenticated") and st.session_state.get("username") == "parasadmin":
-        menu.extend(["View Users", "Login History"])  # Admin options only visible to "parasadmin"
+    if st.session_state.get("authenticated") and st.session_state.get("username") == ADMIN_USERNAME:
+        menu.extend(["View Users", "Login History"])  # Admin options only visible to Admin
 
     # Display the menu options in the sidebar
     choice = st.sidebar.selectbox("Menu", menu)

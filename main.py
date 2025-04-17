@@ -4,6 +4,12 @@ from post_generator import generate_post
 from few_shot import FewShotPosts
 from user_data import init_user_data
 from llm_helper import llm
+import toml  # For reading secrets.toml
+
+# Load credentials from .streamlit/secrets.toml
+secrets = toml.load(".streamlit/secrets.toml")
+ADMIN_USERNAME=secrets["ADMIN_USERNAME"]
+
 
 # Initialize user data
 init_user_data()
@@ -67,7 +73,7 @@ Generate a LinkedIn post using the following information. No preamble.
 
 # Authentication check
 if "authenticated" in st.session_state and st.session_state["authenticated"]:
-    if st.session_state.get("username") == "parasadmin":
+    if st.session_state.get("username") == ADMIN_USERNAME:
         login_page()
     else:
         post_generator()
