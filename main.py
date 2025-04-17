@@ -67,7 +67,7 @@ Generate a LinkedIn post using the following information. No preamble.
 
 # Authentication check
 if "authenticated" in st.session_state and st.session_state["authenticated"]:
-    if st.session_state.get("username") == "admin":
+    if st.session_state.get("username") == "parasadmin":
         login_page()
     else:
         post_generator()
